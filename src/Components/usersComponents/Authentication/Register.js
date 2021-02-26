@@ -10,13 +10,31 @@ function Register(props){
         type: "customer"
     });
 
+    const [data, setData] = useState(null);
     function setUserType(userType){
         props.setUser(userType)
     }
 
-    function registerUser(){
-        axios.post(`http://localhost:4000/register`, user)
-        .then(res => setUserType(res.data.type));
+    const registerUser = () => {
+        // console.log(user);
+        // await axios.post(`http://localhost:4000/register`, user)
+        // .then(res => console.log(res.config));
+        
+        axios({
+            method: "POST",
+            data: {
+                username: user.username,
+                password: user.pass,
+                type: user.pass
+            },
+            withCredentials: true,
+            url: "http://localhost:4000/register",
+        }).then((res) => alert(res.data));
+    }
+
+    const getUser = () => {
+        axios.get(`http://localhost:4000/user`)
+        .then(res => console.log(res));
     }
 
     const handleChange = (e) =>{
@@ -70,6 +88,7 @@ function Register(props){
             </form>
             <button onClick={registerUser} className='orderBtn'>Register</button><br/>
             <span>Already have an account? <Link to="/login" >Login</Link></span>
+            <button onClick={getUser} className='orderBtn'>Get User</button><br/>
         </div>
     </div>  
      

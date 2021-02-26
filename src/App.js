@@ -22,13 +22,16 @@ import axios from 'axios';
 
 function App(){
 
-    axios.get(`http://localhost:4000/register`)
-    .then(res => console.log(res));
+    
     
     const [user, setUser] = useState('');
 
     function setUserProp(userType){
-        setUser(userType);
+        // Object.userType.type
+        axios.get(`http://localhost:4000/user`)
+            .then(res => console.log(res));
+        // setUser(userType.type);
+        console.log(userType);
     }
     
     return (

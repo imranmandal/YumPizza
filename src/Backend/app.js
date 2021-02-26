@@ -1,8 +1,11 @@
 //jshint esversion:6
 require('dotenv').config();
 const express = require('express');
-const session = require('express-session');
 const passport = require('passport');
+// const bodyParser = require('body-parser');
+const session = require('express-session');
+// const cookieParser = require('cookie-parser');
+
 const passportLocalMongoose = require('passport-local-mongoose');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -25,13 +28,19 @@ const mongoose = require('mongoose');
 
  
 const app = express(); 
-app.use(cors());
-app.use(express.json());
-app.use(session({
-    secret: 'This is IM ;)',
-    resave: false,
-    saveUninitialized: false
+app.use(express.json());  
+app.use(cors({
+    origin: "http://localhost:3001",
+    credentials: true,
 }));
+
+app.use(
+    session({
+        secret: 'secretcode',
+        resave: true,
+        saveUninitialized: false,
+}));
+// app.use(cookieParser('secretcode'));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -65,25 +74,28 @@ passport.deserializeUser(User.deserializeUser());      //====>
 
 
 
-
 app.route("/register")
     .get((req, res)=>{
         console.log('get route log');
     })
     
-    .post((req, res)=>{
-        
-        function sendUser(user){
-            res.send(user)
-        }
-        User.register({username: req.body.username, type: req.body.type}, req.body.pass, (err, user)=>{
-        !err ?
-        passport.authenticate("local")(req, res, sendUser(user)) 
-        : 
-        console.log(err.message)
+    .post((req, res)=>{        
+        User.register({username: req.body.username}, req.body.password, (err, user)=>{
+        err ?
+            console.log(err)
+        :
+            passport.authenticate("local")(req, res, ()=>
+                res.send("user created.")
+            ); 
+        });
     });
-})
 
+
+app.route("/user")
+    .get((req, res) => {
+        // res.send(req);
+        console.log(req.user);
+    });
 
 
 
@@ -180,6 +192,10 @@ app.route("/items")
 
 // 
     
+
+
+
+
 
 app.listen(4000, function(){
     console.log("server started on port 4000.")
