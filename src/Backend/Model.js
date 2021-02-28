@@ -1,28 +1,28 @@
-const mongoose = require( 'mongoose');
-
-const userSchema = ({
-    email: String,
-    password: String
+const mongoose = require("mongoose");
+const user = new mongoose.Schema({
+  username: String,
+  password: String,
+  type: String
 });
 
-const User = new mongoose.model('user', userSchema);
+module.exports = mongoose.model("User", user);
 
 
 
-const itemSchema = ({
-    img: {
-        data: Buffer,
-        contentType: String
-    },
-    name: String,
-    category: String,
-    timed: Boolean,
-    from: String,
-    to: String,
-    status: String
-})
+// const itemSchema = ({
+//     img: {
+//         data: Buffer,
+//         contentType: String
+//     },
+//     name: String,
+//     category: String,
+//     timed: Boolean,
+//     from: String,
+//     to: String,
+//     status: String
+// })
 
-const Item = new mongoose.model('Item', itemSchema);
+// const Item = new mongoose.model('Item', itemSchema);
 
 
 

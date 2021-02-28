@@ -6,47 +6,38 @@ function Register(props){
 
     const [user, setUser] = useState({
         username: "",
-        pass: "",
-        type: "customer"
+        password: "",
+        userType: "customer",
     });
 
     const [data, setData] = useState(null);
-    function setUserType(userType){
-        props.setUser(userType)
-    }
+    // function setUserType(userType){
+    //     props.setUser(userType)
+    // }
 
     const registerUser = () => {
         // console.log(user);
-        // await axios.post(`http://localhost:4000/register`, user)
-        // .then(res => console.log(res.config));
+        axios.post(`http://localhost:4000/register`, user)
+        .then((res) => (console.log(res.data)));
         
-        axios({
-            method: "POST",
-            data: {
-                username: user.username,
-                password: user.pass,
-                type: user.pass
-            },
-            withCredentials: true,
-            url: "http://localhost:4000/register",
-        }).then((res) => alert(res.data));
-    }
+        
+    };
 
     const getUser = () => {
         axios.get(`http://localhost:4000/user`)
-        .then(res => console.log(res));
-    }
+        .then(res => (console.log(res)));
+    };
 
     const handleChange = (e) =>{
         const {name, value} = e.target;
         setUser(prevValue => ({...prevValue, [name]: value}))
-    }
+    };
 
     return(    
     <div className='form-container container'>
         <img
 
-            style={{ position: "absolute" ,height: "450px" ,right:'-80px' ,top:"0px" }}
+            style={{ position: "absolute" ,height: "450px" ,right:'-80px' ,top:"0px", zIndex: "-1" }}
             src="./images/klipartz.com.png"
             alt="User Img"
         /> 
@@ -64,7 +55,7 @@ function Register(props){
                      onChange={handleChange} placeholder="Email" value={user.username} />
                 </div>
                 <div className="col-md-6">
-                    <input type="password" name="pass" className="form-control" 
+                    <input type="password" name="password" className="form-control" 
                      onChange={handleChange} placeholder="Password" value={user.pass} />
                 </div>
                 {/* <div class="col-12">

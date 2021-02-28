@@ -27,10 +27,8 @@ function App(){
     const [user, setUser] = useState('');
 
     function setUserProp(userType){
-        // Object.userType.type
         axios.get(`http://localhost:4000/user`)
-            .then(res => console.log(res));
-        // setUser(userType.type);
+            .then((res) => {console.log(res)});
         console.log(userType);
     }
     
@@ -91,7 +89,7 @@ function App(){
                     <Route path="/register">
                         <Register setUser={setUserProp} />
                     </Route>
-                    <Route path="/register">
+                    <Route path="/login">
                         <Login setUser={setUserProp} />
                     </Route>
                     <Route path="/:route" >
