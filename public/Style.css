@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400&display=swap');
+
 *{
     padding: 0%;
     margin: 0;
-    font-family: "Montserrat", sans-serif;
-    transition: all .3s ease 0s;
-    /* scroll-behavior: smooth; */
+    font-family: 'Mulish', sans-serif;
 }
 
 .not-found{
@@ -17,10 +17,21 @@
 
 body{
     font-size: 1.2rem;
-    overflow-x: hidden;
     background-color:#F4F6F6;
+    overflow-x: hidden;
 }
 
+li{
+    list-style: none;
+}
+
+
+
+.logout-btn{
+    position: absolute;
+    right: 250px;
+    top: 30px;
+}
 
 .container{
     padding: 5% 10%;
@@ -29,7 +40,6 @@ body{
 .nav-container{
     background-color: #ffc300;
     margin: 0%;
-    /* height: 50px; */
     transition: all 0.3s ease 0s;
 }
 
@@ -61,11 +71,15 @@ nav:hover{
     font-size: 1.2em;
 }
 
+
+button:not(:disabled){
+    outline: none;
+    border: none;
+}
+
 .orderBtn{
   color: white;
-  outline: none;
   padding: 10px 20px;
-  border: none;
   border-radius: 50px;
   background-color: rgba(192, 57, 43, 0.8);
   transition: all 0.3s ease 0s;
@@ -73,11 +87,18 @@ nav:hover{
 }
 
 
+.cart_count{
+    height: 1.5em;        
+    width: 1.5em;
+    border-radius: 50%;
+    top: -10px;
+}
+
 
 /* ------------Home page */
 
 .home{
-    padding: 10% 15%;
+    padding: 10% 10%;
 }
 
 .cards{
@@ -91,13 +112,13 @@ nav:hover{
   }
 
 .card-child{
-    display: flex;
-    flex-direction: column;
-    padding: 2.5em 1.5em;
-    margin: 0 1em 1em 0;
+    /* display: flex;
+    flex-direction: column; */
+    /* padding: 2.5em 1.5em; */
+    /* margin: 0 1em 1em 0; */
     background-color: #FDFEFE;
     border-radius: 5px;
-    flex: 1 1 400px; 
+    flex: 1 1 300px; 
 }
 
 .card-child:hover{
@@ -122,15 +143,23 @@ nav:hover{
     padding: 1em 0;
 }
 
+.imageupload{
+    padding: 100px 300px;
+}
+
+
 .card-img{
-    height: 10em;
-    width: 50%;
+    min-height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .card-img img{
     text-align: center;
-    height: auto;
-    width: 100%;
+    min-height: 100px;
+    max-height: 140px;
+    width: auto;
+
 }
 
 .addToCartBtn{
@@ -231,17 +260,19 @@ nav:hover{
 
 /* ----cart under account page */
 
-.acc{
-    padding: 10% 0;
-}
+
 
 .acc .cart-container{
     padding: 0;
 }
 
 .acc .total{
-    position: absolute;
-    top: 120%
+    position: static;
+    margin: 0
+}
+
+.acc .cart-body{
+   max-width: 100%;
 }
 
 
@@ -293,12 +324,6 @@ nav:hover{
     transition: all .3s ease 0s;
 }
 
-.cart-btn{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
 .trackBtn{
     background-color: #c0392bcc;
 }
@@ -307,10 +332,6 @@ nav:hover{
     background-color: #FFC300;
 }
 
-.removeBtn{
-   background: none;
-   color: #D5DBDB;
-}
 
 .removeBtn:hover{
     color: #AAB7B8
@@ -405,11 +426,9 @@ nav:hover{
 
 
 .dash-nav1{
-    display: block;
-    position: fixed;
-    height: 100vh;
+    position: fixed;    
+    min-height: 100vh;
     width: 120px;
-    display: block;
     background-color:#142640;
     text-align: center;
     font-size: .7em;
@@ -419,15 +438,15 @@ nav:hover{
 
 .dash-nav1 img{
     height: 70px;
-    padding: 0px;
     margin: 5px;
-    /* position: sticky; */
 }
 
 .dash-nav1 ul{
-    height: 85vh;
-    overflow: auto;
+    height: calc(100vh - 70px);
+    overflow-y: scroll;
 }
+
+
 
 .dash-nav1 ul li {
     padding: 2em 0;
@@ -585,8 +604,10 @@ nav:hover{
 
 .item-img{
     height: 120px;
+    width: 120px;
     border-radius: 60px;
     border: 2px solid #7F8C8D;
+    padding: .3em;
 }
 
 .item .table{
@@ -736,21 +757,18 @@ nav:hover{
 .actions .edit:hover{
     color: #fff;
     border: #27AE60;
-    border-radius: 50px;
     background-color: #27AE60;
 }
 
 .actions .timer:hover{
     color: #fff;
     border: #3498DB;
-    border-radius: 50px;
     background-color: #3498DB;
 }
 
 .actions .delete:hover{
     color: #fff;
     border: #CB4335;
-    border-radius: 50px;
     background-color: #CB4335;
 }
 
@@ -790,6 +808,10 @@ nav:hover{
     text-align: center;
 }
 
+.table td, .table th{
+    vertical-align: middle;
+}
+
 .filter{
     display: flex;
     justify-content: space-between;
@@ -800,6 +822,7 @@ nav:hover{
     display: flex;
     justify-content: space-around;
     padding: 0.5em;
+    outline: 0;
 }
 
 .search-box{
@@ -902,20 +925,7 @@ nav:hover{
 
 /* -------- add item */
 
-.addItem{
-    display: flex;
-    justify-content: space-around;
-    padding: 2em 0;
-    background-color: #E8F8F5;
-}
-
-.addItemDetail{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.addItem input, select {
+.pizza-detail input, select {
     outline: none;
     border: none;
     border-bottom: 1px solid gray;
@@ -923,10 +933,11 @@ nav:hover{
     background: none;
 }
 
-.addItem .add-item-btn{
+.add-item-btn{
     height: 40px;
-    margin-top: 1em;
 }
+
+
 
 .addimg{
     min-height: 150px;
@@ -935,42 +946,58 @@ nav:hover{
     width: 150px;
     border-radius: 50%;
     background-color: rgba(127, 140, 141, .2);
-    /* padding: 3em 0; */
     text-align: center;
     cursor: pointer;
 }
 
-
-.item-detail{
-    display: flex;
-    flex-direction: row;
-}
-
-.item-detail select{
-    margin: auto 10px;
-}
-
-.addItemToggleBtn{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.addItemToggleBtn .switch{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.addTimeItem{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.rupee{
+    color: grey;
+    top: 15px;
+    right: 15px;
+    padding: 5px 0;
 }
 
 
 
+/* ---------- PAYMENT PAGE */
+.payment-side-img{
+    height: 87vh;
+    width: auto;
+    overflow: hidden;
+    background: linear-gradient(to right,rgb(255, 255, 255, 0.3),rgb(255, 255, 255, 1));
+}
+
+.payment-side-img img{
+    position: relative;
+    height: 100%;
+    width: auto;
+    z-index: -1;
+}
+
+.payment-options{
+    background-color: #fff;
+}
+
+.payment-options-child{
+    border-radius: 15px;
+    box-shadow: 0 0 10px grey;
+}
+
+.cod{
+    border-bottom: solid green 1px;
+}
 
 
+.online-payments  p{
+    /* border-bottom: 0.5px solid grey; */
+    cursor: pointer;
+}
+
+.online-payments p:hover, .cod label:hover{
+    cursor: pointer;
+    color: #fff;
+    background-color: #FFBF00;
+}
 
 
 
